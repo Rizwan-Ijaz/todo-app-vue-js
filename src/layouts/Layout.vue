@@ -11,6 +11,13 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
         <q-toolbar-title> Todo App </q-toolbar-title>
+        <q-btn
+          to="/auth"
+          icon-right="account_circle"
+          label="Login"
+          class="absolute-right"
+          flat
+        />
       </q-toolbar>
     </q-header>
 
@@ -28,7 +35,7 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      width="250"
+      :width="250"
       :breakpoint="767"
       show-if-above
       bordered
@@ -68,10 +75,10 @@ export default {
       leftDrawerOpen: false,
       navs: [
         { label: "Todo", icon: "list", to: "/" },
-        { label: "Settings", icon: "settings", to: "/settings" },
-      ],
+        { label: "Settings", icon: "settings", to: "/settings" }
+      ]
     };
-  },
+  }
 };
 </script>
 
