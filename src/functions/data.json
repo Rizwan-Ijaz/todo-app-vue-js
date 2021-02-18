@@ -1,0 +1,24 @@
+{
+    "tasks": {
+        "Md6QTP6AEKa3lb07fL6Jl6A3Xlv2": {
+            "ID1": {
+                "name": "Go to shop",
+                "dueDate": "2021/02/17",
+                "dueTime": "18:20",
+                "completed": false
+            },
+            "ID2": {
+                "name": "Get bananas",
+                "dueDate": "2021/02/18",
+                "dueTime": "18:30",
+                "completed": false
+            },
+            "ID3": {
+                "name": "Get apples",
+                "dueDate": "2021/02/19",
+                "dueTime": "18:40",
+                "completed": false
+            }
+        }
+    }
+}

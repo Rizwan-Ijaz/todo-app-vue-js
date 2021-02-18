@@ -11,10 +11,20 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
         <q-toolbar-title> Todo App </q-toolbar-title>
+
         <q-btn
+          v-if="!loggedIn"
           to="/auth"
           icon-right="account_circle"
           label="Login"
+          class="absolute-right"
+          flat
+        />
+        <q-btn
+          v-else
+          @click="logoutUser"
+          icon-right="account_circle"
+          label="Logout"
           class="absolute-right"
           flat
         />
@@ -68,6 +78,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   name: "MainLayout",
   data() {
@@ -78,6 +89,12 @@ export default {
         { label: "Settings", icon: "settings", to: "/settings" }
       ]
     };
+  },
+  computed: {
+    ...mapState("auth", ["loggedIn"])
+  },
+  methods: {
+    ...mapActions("auth", ["logoutUser"])
   }
 };
 </script>
