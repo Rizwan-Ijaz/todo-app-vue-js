@@ -6,7 +6,9 @@
   "author": "Rizwan",
   "private": true,
   "scripts": {
-    "icons": "icongenie generate -i src/icon/AppIcon.png --skip-trim --theme-color 4682b4"
+    "icons": "icongenie generate -i src/icon/AppIcon.png --skip-trim --theme-color 4682b4",
+    "start": "npx quasar dev",
+    "start-android": "npx quasar dev -m cordova -T android"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
