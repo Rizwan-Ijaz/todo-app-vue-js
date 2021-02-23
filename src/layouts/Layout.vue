@@ -68,6 +68,22 @@
             <q-item-label>{{ nav.label }}</q-item-label>
           </q-item-section>
         </q-item>
+
+        <q-item
+          v-if="$q.platform.is.electron"
+          @click="quitApp"
+          key="Quit"
+          class="text-grey-4 absolute-bottom"
+          clickable
+          exact
+        >
+          <q-item-section avatar>
+            <q-icon name="power_settings_new" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Quit</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -94,7 +110,19 @@ export default {
     ...mapState("auth", ["loggedIn"])
   },
   methods: {
-    ...mapActions("auth", ["logoutUser"])
+    ...mapActions("auth", ["logoutUser"]),
+    quitApp() {
+      this.$q
+        .dialog({
+          title: "Confirm",
+          message: "Really quit want Todo app?",
+          cancel: true
+        })
+        .onOk(() => {
+          if (this.$q.platform.is.electron)
+            require("electron").ipcRenderer.send("quit-app");
+        });
+    }
   }
 };
 </script>
