@@ -1,6 +1,8 @@
 import { LocalStorage, Loading } from "quasar";
 import { firebaseAuth } from "boot/firebase";
 import { showErrorMessage } from "src/functions/function-show-error-message";
+import firebase from "firebase/app";
+import { Notify } from "quasar";
 
 const state = {
   loggedIn: false
@@ -57,6 +59,37 @@ const actions = {
         this.$router.replace("/auth").catch(err => {});
       }
     });
+  },
+
+  async changePassword({}, payload) {
+    const user = firebaseAuth.currentUser;
+    console.log({ payload });
+    actions
+      .reAuthenticateWithCredential(payload.currentPassword)
+      .then(response => {
+        user
+          .updatePassword(payload.newPassword)
+          .then(response => {
+            Notify.create("Password is changed");
+          })
+          .catch(err => {
+            showErrorMessage(err.message);
+          });
+      })
+      .catch(err => {
+        console.error(err);
+        showErrorMessage("You current password is incorrect");
+      });
+  },
+
+  reAuthenticateWithCredential(currentPassword) {
+    const user = firebaseAuth.currentUser;
+    const credential = firebase.auth.EmailAuthProvider.credential(
+      user.email,
+      currentPassword
+    );
+
+    return user.reauthenticateWithCredential(credential);
   }
 };
 

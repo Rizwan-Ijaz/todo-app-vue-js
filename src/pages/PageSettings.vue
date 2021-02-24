@@ -20,6 +20,15 @@
           <q-toggle color="blue" v-model="showTasksInOneList" />
         </q-item-section>
       </q-item>
+
+      <q-item to="/settings/change-password" v-ripple>
+        <q-item-section>
+          <q-item-label>Change Passsword</q-item-label>
+        </q-item-section>
+        <q-item-section side>
+          <q-icon name="chevron_right" />
+        </q-item-section>
+      </q-item>
     </q-list>
 
     <q-list bordered padding>
@@ -67,7 +76,7 @@ export default {
       },
       set(val) {
         this.setShow12HourTimeFormat(val);
-      },
+      }
     },
     showTasksInOneList: {
       get() {
@@ -75,20 +84,20 @@ export default {
       },
       set(val) {
         this.setShowTasksInOneList(val);
-      },
-    },
+      }
+    }
   },
   methods: {
     ...mapActions("settings", [
       "setShow12HourTimeFormat",
-      "setShowTasksInOneList",
+      "setShowTasksInOneList"
     ]),
     visitOurWebsite() {
       openURL("http://www.google.com");
     },
     emailUs() {
       window.location.href = "mailto:example@example.com";
-    },
-  },
+    }
+  }
 };
 </script>

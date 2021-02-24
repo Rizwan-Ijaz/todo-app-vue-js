@@ -8,7 +8,7 @@
         <modal-task-duedate :dueDate.sync="taskToSubmit.dueDate" />
 
         <modal-task-duetime
-          v-if="taskToSubmit.dueTime"
+          v-if="taskToSubmit.dueDate"
           :dueTime.sync="taskToSubmit.dueTime"
         />
       </q-card-section>
@@ -30,8 +30,8 @@ export default {
         name: "",
         dueDate: "",
         dueTime: "",
-        completed: false,
-      },
+        completed: false
+      }
     };
   },
   props: ["task", "id"],
@@ -40,11 +40,11 @@ export default {
     submitTask() {
       this.updateTask({ id: this.id, updates: this.taskToSubmit });
       this.$emit("close");
-    },
+    }
   },
 
   created() {
     this.taskToSubmit = Object.assign({}, this.task);
-  },
+  }
 };
 </script>

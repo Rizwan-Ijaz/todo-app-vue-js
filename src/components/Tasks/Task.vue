@@ -7,7 +7,7 @@
     v-touch-hold:1000.mouse="showEditTaskModal"
   >
     <q-item-section side top>
-      <q-checkbox v-model="task.completed" />
+      <q-checkbox class="no-pointer-events" :value="task.completed" />
     </q-item-section>
 
     <q-item-section>
@@ -66,7 +66,7 @@ import { date } from "quasar";
 export default {
   data() {
     return {
-      showEditTask: false,
+      showEditTask: false
     };
   },
   props: ["id", "task"],
@@ -80,7 +80,7 @@ export default {
       } else {
         return this.task.dueTime;
       }
-    },
+    }
   },
   methods: {
     ...mapActions("tasks", ["updateTask", "deleteTask"]),
@@ -90,7 +90,7 @@ export default {
           title: "Confirm",
           message: "Would you really like to delete this task?",
           cancel: true,
-          persistent: true,
+          persistent: true
         })
         .onOk(() => {
           this.deleteTask(id);
@@ -99,10 +99,10 @@ export default {
     showEditTaskModal() {
       console.log("triggered");
       this.showEditTask = true;
-    },
+    }
   },
   components: {
-    "edit-task": require("components/Tasks/Modals/EditTask").default,
+    "edit-task": require("components/Tasks/Modals/EditTask").default
   },
   filters: {
     niceDate(value) {
@@ -111,15 +111,14 @@ export default {
     searchHightlight(value, search) {
       if (search) {
         const searchRegx = new RegExp(search, "ig");
-        return value.replace(searchRegx, (match) => {
+        return value.replace(searchRegx, match => {
           return `<span class="bg-yellow-6">${match}</span>`;
         });
       }
       return value;
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>
