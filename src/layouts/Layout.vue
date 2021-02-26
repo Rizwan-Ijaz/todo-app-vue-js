@@ -22,7 +22,7 @@
         />
         <q-btn
           v-else
-          @click="logoutUser"
+          @click="onLogout"
           icon-right="account_circle"
           label="Logout"
           class="absolute-right"
@@ -111,6 +111,17 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["logoutUser"]),
+    onLogout() {
+      this.$q
+        .dialog({
+          title: "Logout",
+          message: "Are you sure?",
+          cancel: true
+        })
+        .onOk(() => {
+          this.logoutUser();
+        });
+    },
     quitApp() {
       this.$q
         .dialog({

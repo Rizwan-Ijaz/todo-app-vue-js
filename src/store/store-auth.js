@@ -62,8 +62,8 @@ const actions = {
   },
 
   async changePassword({}, payload) {
+    Loading.show();
     const user = firebaseAuth.currentUser;
-    console.log({ payload });
     actions
       .reAuthenticateWithCredential(payload.currentPassword)
       .then(response => {
@@ -71,14 +71,17 @@ const actions = {
           .updatePassword(payload.newPassword)
           .then(response => {
             Notify.create("Password is changed");
+            Loading.hide();
           })
           .catch(err => {
             showErrorMessage(err.message);
+            Loading.hide();
           });
       })
       .catch(err => {
         console.error(err);
         showErrorMessage("You current password is incorrect");
+        Loading.hide();
       });
   },
 

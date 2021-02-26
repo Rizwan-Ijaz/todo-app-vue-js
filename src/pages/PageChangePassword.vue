@@ -1,5 +1,12 @@
 <template>
   <q-page padding>
+    <q-btn
+      to="/settings"
+      color="primary"
+      icon="chevron_left"
+      label="Back"
+      flat
+    />
     <h4 class="font-weight-bold">Update your password</h4>
     <form @submit.prevent="submitForm">
       <div class="row">
@@ -8,6 +15,7 @@
           class="col-12 col-md-4 offset-md-8 q-mb-md"
           label="Current Password"
           ref="currentPassword"
+          :rules="[val => val || 'Please enter your current password']"
           v-model="formData.currentPassword"
           stack-label
           outlined
@@ -43,6 +51,7 @@
       </div>
       <div class="row">
         <q-space />
+        <q-btn color="primary" label="Cancel" flat to="/settings" />
         <q-btn color="primary" label="Update" type="submit" />
       </div>
     </form>
@@ -62,11 +71,16 @@ export default {
   },
   methods: {
     submitForm() {
-      const { newPassword, confirmPassword } = this.$refs;
+      const { currentPassword, newPassword, confirmPassword } = this.$refs;
+      currentPassword.validate();
       newPassword.validate();
       confirmPassword.validate();
 
-      if (!newPassword.hasError && !confirmPassword.hasError) {
+      if (
+        !currentPassword.hasError &&
+        !newPassword.hasError &&
+        !confirmPassword.hasError
+      ) {
         this.changePassword(this.formData);
       }
     },
