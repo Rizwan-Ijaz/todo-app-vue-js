@@ -50,9 +50,7 @@
         </div>
       </template>
       <template v-else>
-        <span class="absolute-center">
-          <q-spinner color="primary" size="3em" />
-        </span>
+        <tasks-skeleton />
       </template>
     </div>
 
@@ -80,6 +78,7 @@ export default {
     "tasks-todo": require("components/Tasks/TasksTodo").default,
     "tasks-completed": require("components/Tasks/TasksCompleted").default,
     "no-tasks": require("components/Tasks/NoTasks").default,
+    "tasks-skeleton": require("components/Tasks/TasksSkeleton").default,
     search: require("components/Tasks/Tools/Search").default,
     sort: require("components/Tasks/Tools/Sort").default
   },
